@@ -3,15 +3,6 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $name=$_POST['name'];
-      $contact=$_POST['contact'];
-      $dob=$_POST['dob'];
-      $degree=$_POST['degree'];
-      $branch=$_POST['clgbranch'];
-      $college=$_POST['clgname'];
-    ?>
 <style>
 body{
         background-image:url("https://media.gettyimages.com/photos/abstract-blurred-office-interior-room-blurry-working-space-with-use-picture-id1019217082?b=1&k=6&m=1019217082&s=612x612&w=0&h=OL2CzvqBfdXPVlws7fTrMf0gNAZ_oRKaEBIjOXm998Y=");
@@ -133,28 +124,28 @@ body{
       </form>
       <br>
       <?php
-
-      if (empty($contact)) {
-       echo "Contact No. is required";
-      }
-      elseif (empty($name)) {
-       echo "Name is required";
-      }
-      elseif (empty($college)) {
-       echo "College Name is required";
-      }
-      elseif (empty($branch)) {
-       echo "Branch name is required";
-      }
-      elseif (empty($degree)) {
-       echo "<b>Select the Degree you are pursuing</b>";
-      }
-      elseif (empty($dob)) {
-       echo "<b>Date of Birth is required</b>";
-      }
-      else {
-        header('Location: http://localhost/resilient/resume.php');
-      }
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          if (empty($contact)) {
+           echo "Contact No. is required";
+          }
+          elseif (empty($name)) {
+           echo "Name is required";
+          }
+          elseif (empty($college)) {
+           echo "College Name is required";
+          }
+          elseif (empty($branch)) {
+           echo "Branch name is required";
+          }
+          elseif (empty($degree)) {
+           echo "<b>Select the Degree you are pursuing</b>";
+          }
+          elseif (empty($dob)) {
+           echo "<b>Date of Birth is required</b>";
+          }
+          else {
+            header('Location: http://localhost/resilient/resume.php');
+          }
       }
        ?>
     </div>
