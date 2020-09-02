@@ -1,4 +1,34 @@
-<!DOCTYPE html>
+ <?php
+if(isset($_POST['name']))
+{
+  setcookie("username",$_POST['name']);
+}
+ ?>
+ <?php
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   if (empty($_POST['contact'])) {
+     $x= "<b>Contact No. is required</b>";
+   }
+   elseif (empty($_POST['name'])) {
+    $x= "<b>Name is required</b>";
+   }
+   elseif (empty($_POST['clgname'])) {
+    $x= "<b>College Name is required</b>";
+   }
+   elseif (empty($_POST['clgbranch'])) {
+    $x= "<b>Branch name is required</b>";
+   }
+   elseif (empty($_POST['degree'])) {
+    $x= "<b>Select the Degree you are pursuing</b>";
+   }
+   elseif (empty($_POST['dob'])) {
+    $x= "<b>Date of Birth is required</b>";
+   }
+   else {
+     header('Location: http://localhost/resilient/resume.php');
+   }
+ }
+  ?>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -122,30 +152,9 @@ body{
         <input type="submit" id="Button"  value="Next"/>
         <br><br>
       </form>
-      <br>
       <?php
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
-          if (empty($contact)) {
-           echo "Contact No. is required";
-          }
-          elseif (empty($name)) {
-           echo "Name is required";
-          }
-          elseif (empty($college)) {
-           echo "College Name is required";
-          }
-          elseif (empty($branch)) {
-           echo "Branch name is required";
-          }
-          elseif (empty($degree)) {
-           echo "<b>Select the Degree you are pursuing</b>";
-          }
-          elseif (empty($dob)) {
-           echo "<b>Date of Birth is required</b>";
-          }
-          else {
-            header('Location: http://localhost/resilient/resume.php');
-          }
+      if(isset($x)){
+        echo $x;
       }
        ?>
     </div>
