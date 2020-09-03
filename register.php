@@ -1,17 +1,21 @@
-<!DOCTYPE html>
+<?php
+$cookie_name = "user";
+$cookie_value = "John Doe";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+?>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     
 <style>
 body{
-        background-image:url("https://www.iesabroad.org/files/blog/images/vbruick/2017-12-05/default_featured_image_7.jpg");
+        background-image:url("https://media.gettyimages.com/photos/abstract-blurred-office-interior-room-blurry-working-space-with-use-picture-id1019217082?b=1&k=6&m=1019217082&s=612x612&w=0&h=OL2CzvqBfdXPVlws7fTrMf0gNAZ_oRKaEBIjOXm998Y=");
         background-size:cover;
         background-repeat: no-repeat;
         background-position: center;
-        background-color: rgba(255,255,255,0.2);
-        background-blend-mode: lighten;
         font-family:Arial;
       }
 #Form{
@@ -63,7 +67,7 @@ body{
 
 
 </style>
-<title>Sign in</title>
+<title>Register</title>
 </head>
 
 <body>
@@ -107,33 +111,101 @@ body{
     
     
     <center>
+        
+    <?php
+        
+
+    
+   
+    
+    $emailErr = $type_Err = $passErr = "";
+    $email = $type = $pass = "";
+    $isError = false;
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $email = $_POST["emailid"];
+        $pass = $_POST["password"];
+        if(!isset($_POST["type"])){
+            $type_Err = "*A type must be selected"."<br>";
+            $isError = true;
+        }else{
+           $type = $_POST["type"]; 
+        }
+        
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          $emailErr = "<br>"."Invalid email format";
+          $isError = true;
+        }
+        if(strlen($pass) <= 8){
+            $passErr = $passErr."<br>"."Password length must be atleast 8 char";
+            $isError = true;
+        }
+        if(!preg_match("#[0-9]+#",$pass)){
+            $passErr = $passErr."<br>"."Password must contain atleast 1 number";
+            $isError = true;
+        }
+        if(!preg_match("#[A-Z]+#",$pass)){
+            $passErr = $passErr."<br>"."Password must contain atleast 1 uppercase";
+            $isError = true;
+        }
+        if(!preg_match("#[a-z]+#",$pass)){
+            $passErr = $passErr."<br>"."Password must contain atleast 1 lowercase";
+            $isError = true;
+        }
+        
+        if(!$isError){
+            if(!isset($_COOKIE[$cookie_name])) {
+              echo "Cookie named '" . $cookie_name . "' is not set!";
+            } else {
+//              echo "Cookie '" . $cookie_name . "' is set!<br>";
+//              echo "Value is: " . $_COOKIE[$cookie_name];
+//                $_COOKIE["email"] = $email;
+//                echo "Value is: " . $_COOKIE["email"];
+                
+                setcookie("emailid", $email, time() + (86400 * 30), "/");
+                setcookie("type", $type, time() + (86400 * 30), "/"); 
+            }
+            header("Location: http://localhost/Resilient/home.php");
+        }
+        
+    }
+    
+    
+    
+    ?>
+        
 <div id="Form">
-      <form action="conect.php" method="POST" >
+      <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" >
         <h4 style="font-weight: bold;">REGISTER</h4>
         <h6 >Create a new Resilience Account</h6>
-        <input type="text" name="userid" placeholder="Enter your email id" id="ep" autocorrect="off" style="border-color: #200122; padding:8px;border-radius: 10px;width:250px;" />
+        <input type="text" name="emailid" placeholder="Enter your email id" id="emailid" autocorrect="off" style="border-color: #200122; padding:8px;border-radius: 10px;width:250px;" />
+          <span class="error" style="color: red">* <?php echo $emailErr;?></span>
         <br><br>
           
-        <input type="password" name="password" placeholder="Enter a new password" id="ep" autocapitalize="none" autocorrect="off" style="border-color: #200122; padding:8px; border-radius: 10px;width:250px; " />
+        <input type="password" name="password" placeholder="Enter a new password" id="pass" autocapitalize="none" autocorrect="off" style="border-color: #200122; padding:8px; border-radius: 10px;width:250px; " />
+          <span class="error" style="color: red">* <?php echo $passErr;?></span>
         <br><br>
           
           <div id="type_box">
           
-          <input type="radio" name="type" value="1" id="type">&nbsp;Student<br>
-          <input type="radio" name="type" value="2" id="type">&nbsp;Employer<br>
-              
+          <input type="radio" name="type" value="Student" id="type">&nbsp;Student<br>
+          <input type="radio" name="type" value="Employer" id="type">&nbsp;Employer<br>
+              <span class="error" style="color: red"><?php echo $type_Err;?></span>
               </div>
+          
         
         <input type="submit" id="Button"  value="Register"/>
       </form>
       <br>
-      <a href="#" id="Fo" style="text-decoration: none; color: black;">Already have an account?</a>
+      <a href="#" id="back_to_login_link" style="text-decoration: none; color: black;">Already have an account?</a>
       <br><br>
       
       
-      <a href="createacc.html" id="Button" role="button" style="text-decoration: none; ">Login</a>
+      <a href="#" id="Button" role="button" style="text-decoration: none; ">Login</a>
     </div>
     </center>
+    
+    
+    
     
     
     
