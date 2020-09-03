@@ -1,8 +1,9 @@
- <?php
+  <?php
 if(isset($_POST['name']))
 {
   setcookie("username",$_POST['name']);
 }
+  session_start();
  ?>
  <?php
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,6 +26,12 @@ if(isset($_POST['name']))
     $x= "<b>Date of Birth is required</b>";
    }
    else {
+     $_SESSION["stname"]=$_POST['name'];
+     $_SESSION["stdob"]=$_POST['dob'];
+     $_SESSION["stcontact"]=$_POST['contact'];
+     $_SESSION["stclg"]=$_POST['clgname'];
+     $_SESSION["stdegree"]=$_POST['degree'];
+     $_SESSION["stbranch"]=$_POST['clgbranch'];
      header('Location: http://localhost/resilient/resume.php');
    }
  }
@@ -119,7 +126,8 @@ body{
       <form method="POST" >
         <h4 style="font-weight: bold;">Enter details to complete application</h4>
         <input type="text" name="name" placeholder="Enter your Name" id="ep" autocorrect="off" style="border-color: #200122; padding:8px;border-radius: 10px;width:250px;" />
-        <br><br>
+        <br>
+        <br>
         Enter DOB :<br>
         <input type="date" name="dob" max="2002-12-31" placeholder="Enter your Age" id="ep" style="border-color: #200122; padding:8px; border-radius: 10px;width:250px; " />
         <br><br>
