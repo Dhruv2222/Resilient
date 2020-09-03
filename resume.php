@@ -13,7 +13,7 @@
    $_SESSION["skill1"]=$_POST['skill1'];
    $_SESSION["skill2"]=$_POST['skill2'];
    $_SESSION["skill3"]=$_POST['skill3'];
-   header('Location: http://localhost/resilient/sthome.php');
+   header('Location: http://localhost/resilient/resilientResume.php');
  }
 
  ?>
