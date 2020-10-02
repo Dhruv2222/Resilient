@@ -27,7 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Add new Internship!</title>
+    <title>Create New Resume!</title>
     <style>
       body{
         /* background-image: repeating-linear-gradient(white,#9933FF); */
@@ -91,11 +91,6 @@
     <form class="container" method="post">
         <div>
             <center><br><h1 id="sub_heading">Create your resume here:</h1><br></center>
-        </div>
-        <div class="form-group">
-          <fieldset disabled>
-        <center>  <img src="<?php echo $_SESSION["imgpath"]; ?>" height="200px" width="200px"></center>
-        </fieldset>
         </div>
         <div class="form-group">
           <fieldset disabled>
