@@ -33,6 +33,9 @@
         /* background-image: repeating-linear-gradient(white,#9933FF); */
         background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSraJfiuK1417TXvBIDGlMSOWmmy33uevCEyw&usqp=CAU");
       }
+      img{
+        border-radius: 20%;
+      }
       #main_heading{
         font-family: "Sofia";
         font-size: 25px;
@@ -85,9 +88,14 @@
         </div>
     </nav>
 
-    <form class="container">
+    <form class="container" method="post">
         <div>
             <center><br><h1 id="sub_heading">Create your resume here:</h1><br></center>
+        </div>
+        <div class="form-group">
+          <fieldset disabled>
+        <center>  <img src="<?php echo $_SESSION["imgpath"]; ?>" height="200px" width="200px"></center>
+        </fieldset>
         </div>
         <div class="form-group">
           <fieldset disabled>
@@ -95,16 +103,7 @@
           <input type="text" class="form-control" id="name" value="<?php if(isset($_COOKIE["username"])){ echo $_COOKIE["username"]; } ?>">
         </fieldset>
         </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label name="company_name" id="form_font">School Name:</label>
-          <input type="text" class="form-control" id="" placeholder="St. Mary's">
-        </div>
-        <div class="form-group col-md-6">
-          <label id="form_font">10th Board Percentage:</label>
-          <input type="text" class="form-control" id="" placeholder="%">
-        </div>
-      </div>
+
       <br>
       <center><h4 id="sub_heading">Enter your Internship Details</h4></center>
       <br>
@@ -146,10 +145,18 @@
         </div>
       </div>
       <br>
-      <center><h4 id="sub_heading">Skills:</h4></center>
-        <div class="form-group">
+      <center><h4 id="sub_heading">Top 3 Skills:</h4></center>
+      <div class="form-row">
+        <div class="form-group col-md-4">
           <input type="text" name="skill1" class="form-control" id="" placeholder="C Programming">
         </div>
+        <div class="form-group col-md-4">
+          <input type="text" name="skill2" class="form-control" id="" placeholder="Marketing">
+        </div>
+        <div class="form-group col-md-4">
+          <input type="text" name="skill3" class="form-control" id="" placeholder="Accounts">
+        </div>
+      </div>
       <center>
       <button type="submit" class="btn btn-primary">Submit</button>
       </center>
