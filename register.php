@@ -41,7 +41,7 @@
   </head>
   <body>
       
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <a class="navbar-brand" href="#" id="main_heading">Resilient</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -117,18 +117,32 @@
         }
         
         if(!$isError){
+            
+            $conn = mysqli_connect('localhost','root','','resilient');
+            $sql = "INSERT INTO register(email,password,usertype) VALUES (?,?,?)";
+            $prep = mysqli_prepare($conn,$sql);
+            mysqli_stmt_bind_param($prep,"ssi",$email,$pass,$type);
+            $result = mysqli_stmt_execute($prep);
+//            $result = mysqli_query($conn,$sql);
+            if($result){
+                if($type==0){
+                    header("Location: http://localhost/Resilient/stdetails.php");
+                }
+                if($type==1){
+                    header("Location: http://localhost/Resilient/reRegister.php");
+                }
+            }
+            else{
+                echo mysqli_error($conn);
+            }
+            
             if(!isset($_COOKIE[$cookie_name])) {
               echo "Cookie named '" . $cookie_name . "' is not set!";
             } else {
                 setcookie("emailid", $email, time() + (86400 * 30), "/");
                 setcookie("type", $type, time() + (86400 * 30), "/"); 
             }
-            if($type=='Student'){
-                header("Location: http://localhost/Resilient/home.php");
-            }
-            if($type=='Recruiter'){
-                header("Location: http://localhost/Resilient/reRegister.php");
-            }
+            
             
         }
         
@@ -166,20 +180,20 @@
         <label class="" for="" id="form_font">Select type of account:</label>
         
         <div class="custom-control custom-radio">
-          <input type="radio" id="customRadio1" name="type" value="Student" class="custom-control-input">
+          <input type="radio" id="customRadio1" name="type" value="0" class="custom-control-input">
           <label class="custom-control-label" for="customRadio1" id="radio_font">Student</label>
         </div>
         <div class="custom-control custom-radio">
-          <input type="radio" id="customRadio2" name="type" value="Recruiter" class="custom-control-input">
+          <input type="radio" id="customRadio2" name="type" value="1" class="custom-control-input">
           <label class="custom-control-label" for="customRadio2" id="radio_font">Recruiter</label>
         </div>
         <span class="error" style="color: red"><?php echo $type_Err;?></span>
         <br>
         
-        <a href="#" id="form_font" style="text-decoration: none;">Already have an account?</a>
+        <a  id="form_font" style="text-decoration: none;">Already have an account?</a>
       
       
-      <a href="#" id="Button" role="button" style=" ">Login</a>
+      <a href="login.php" id="Button" role="button" style=" ">Login</a>
         <br><br>
 
       
