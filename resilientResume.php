@@ -58,7 +58,7 @@ session_start();
   </head>
   <body>
       
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <a class="navbar-brand" href="#" id="main_heading">Resilient</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -87,11 +87,7 @@ session_start();
           </form>
         </div>
     </nav>
-      
-      
-      
-      
-      
+     
     <div class="container" >
         <center>
         <div>
@@ -102,6 +98,7 @@ session_start();
             <center>
             <div class="row mt-4">
             <div class="col">
+              <img src="<?php echo $_SESSION["imgpath"]?>" class="rounded-circle" height="110px" width="110px" style="border-style:solid;">
               <h1 id="form_font"><?php echo $_SESSION["stname"]?></h1>
             </div>
             <div class="col">
@@ -134,7 +131,8 @@ session_start();
               <h6 id="form_font"><?php echo $_SESSION["stclg"]?></h6>
             </div>
             <div class="mr-5" id="right">
-              <h6 id="detail_font">95%</h6>
+<!--                Enter percentage field?-->
+              <h6 id="detail_font"></h6>
             </div>
             </div><br>
             
@@ -145,10 +143,10 @@ session_start();
             </div>
             <div class="row">
             <div class="col ml-3">
-              <h6 id="form_font">SIES College, Sion(West)</h6>
+              <h6 id="form_font"><?php echo $_SESSION["jcollege"]?></h6>
             </div>
             <div class="mr-5" id="right">
-              <h6 id="detail_font">95%</h6>
+              <h6 id="detail_font"><?php echo $_SESSION["12Board"]?>%</h6>
             </div>
             </div><br>
             
@@ -159,10 +157,10 @@ session_start();
             </div>
             <div class="row">
             <div class="col ml-3">
-              <h6 id="form_font">Arya Vidya Mandir, BKC</h6>
+              <h6 id="form_font"><?php echo $_SESSION["school"]?></h6>
             </div>
             <div class="mr-5" id="right">
-              <h6 id="detail_font">95%</h6>
+              <h6 id="detail_font"><?php echo $_SESSION["10Board"]?>%</h6>
             </div>
             </div>
             <hr class="new m-4">
@@ -179,18 +177,28 @@ session_start();
             
             <div class="row">
             <div class="col ml-3">
-              <h5 id="form_font">Northstar Innovations</h5>
+              <h5 id="form_font"><?php echo $_SESSION["interncompany"]?></h5>
             </div>
             </div>
+            
             <div class="row">
             <div class="col ml-3">
-              <h6 id="form_font">Android Developer</h6>
+              <h6 id="form_font"><?php echo $_SESSION["internprofile"]?></h6>
+              <h6 id="form_font"><?php echo $_SESSION["interndes"]?></h6>
             </div>
+              
+                
             <div class="mr-5" id="right">
-              <h6 id="detail_font">1 month</h6>
+              <h6 id="detail_font">
+                <?php
+                echo $_SESSION["date_diff"];
+                ?>
+              </h6>
             </div>
+                
             </div><br>
             
+<!--
             <div class="row">
             <div class="col ml-3">
               <h5 id="form_font">KJSCE Internal</h5>
@@ -218,6 +226,7 @@ session_start();
               <h6 id="detail_font">1 year</h6>
             </div>
             </div>
+-->
             <hr class="new m-4">
             
             <div class="row">
@@ -229,17 +238,12 @@ session_start();
             
             <div class="row">
             <div class="col ml-3">
-              <h5 id="form_font">Project leader</h5>
+              <h5 id="form_font"><?php echo $_SESSION["por"]?></h5>
             </div>
             </div>
             <div class="row">
             <div class="col ml-3">
-              <h5 id="form_font">Manager</h5>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col ml-3">
-              <h5 id="form_font">Project head</h5>
+              <h5 id="form_font">Organization: <?php echo $_SESSION["porOrganization"]?></h5>
             </div>
             </div>
                 
@@ -254,24 +258,24 @@ session_start();
             
             <div class="row">
             <div class="col ml-3">
-              <h5 id="form_font">C programming</h5>
+              <h5 id="form_font"><?php echo $_SESSION["skill1"]?></h5>
             </div>
             </div>
             <div class="row">
             <div class="col ml-3">
-              <h5 id="form_font">Python</h5>
+              <h5 id="form_font"><?php echo $_SESSION["skill2"]?></h5>
             </div>
             </div>
             <div class="row">
             <div class="col ml-3">
-              <h5 id="form_font">Android</h5>
+              <h5 id="form_font"><?php echo $_SESSION["skill2"]?></h5>
             </div>
             </div>
                 
             <hr class="new m-4">
-            
+            <center><button type="submit" class="btn btn-success mb-3">Save</button></center>
         </div>
-      
+      <br>
     </div>
           
     
