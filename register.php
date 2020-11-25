@@ -1,144 +1,201 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<?php
+ session_start();
+ ?>
+<!doctype html>
+<html lang="en">
+  <head>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    
-<style>
-body{
-        background-image:url("https://www.iesabroad.org/files/blog/images/vbruick/2017-12-05/default_featured_image_7.jpg");
-        background-size:cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: rgba(255,255,255,0.2);
-        background-blend-mode: lighten;
-        font-family:Arial;
-      }
-#Form{
-        margin-left:76%;
-        margin-right: 5%;
-        margin-top: 6%;
-        display: block;
-        border: solid #200122 1px ;
-        text-align: center;
-        padding-top: 35px;
-        padding-bottom: 55px;
-        background-color: white;
-        border-radius:20px;
-        width:350px;
-        background-color:#FAF0E6;
-        margin: 110px auto;
-        margin-left:620px;
-      }
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-      #Button{
-        border: solid #200122 1px;
-        border-radius: 18px;
-        padding: 5px;
-        padding-left: 15px;
-        padding-right: 20px;
-        color: white;
-        background-image: linear-gradient(to right ,#200122,#6f0000);
-      }
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-      #Button a:link{
-        text-decoration: none;
-        display: block;
+    <title>Register</title>
+    <style>
+      body{
+        /* background-image: repeating-linear-gradient(white,#9933FF); */
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSraJfiuK1417TXvBIDGlMSOWmmy33uevCEyw&usqp=CAU");
       }
-      #Button:hover{
-        color: greenyellow;
-      }
-    #main_heading{
+      #main_heading{
         font-family: "Sofia";
         font-size: 25px;
         font-weight: bold;
-    }
-    #type_box{
-        border-style: solid;
-        border-radius:10px;
-        width: 250px;
-        margin-left: 50px;
-        margin-bottom: 20px;
-    }
+      }
+        #sub_heading{
+            font-family: "Sofia";
+            font-size: 40px;
+            font-weight: bold;
+            color: aqua;
+        }
+        #form_font{
+            color:aqua;
+        }
+        .container{
+            max-width: 500px;
+        }
+        #radio_font{
+            color:gold;
+        }
 
+  </style>
+  </head>
+  <body>
 
-</style>
-<title>Sign in</title>
-</head>
-
-<body>
-    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#" id="main_heading">Resilient</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Categories
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="#" id="main_heading">Resilient</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="rehome.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Register</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">TnC</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">About us</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0" >
+              <a class="nav-link disabled" href="#">My profile</a>
+              <img src="https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" class="rounded-circle" height="40px" width="40px" style="border-style:solid;">
+          </form>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">About us</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search for internships" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-    
-    
-    
-    <center>
-<div id="Form">
-      <form action="conect.php" method="POST" >
-        <h4 style="font-weight: bold;">REGISTER</h4>
-        <h6 >Create a new Resilience Account</h6>
-        <input type="text" name="userid" placeholder="Enter your email id" id="ep" autocorrect="off" style="border-color: #200122; padding:8px;border-radius: 10px;width:250px;" />
+    </nav>
+
+    <?php
+    $emailErr = $type_Err = $passErr = $con_passErr = "";
+    $email = $type = $pass = $con_pass = "";
+    $isError = false;
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $email = $_POST["emailid"];
+        $pass = $_POST["password"];
+        $con_pass = $_POST["con_password"];
+        if(!isset($_POST["type"])){
+            $type_Err = "*A type must be selected"."<br>";
+            $isError = true;
+        }else{
+           $type = $_POST["type"];
+        }
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          $emailErr = "<br>"."Invalid email format";
+          $isError = true;
+        }
+        if(strlen($pass) <= 8){
+            $passErr = $passErr."<br>"."Password length must be atleast 8 char";
+            $isError = true;
+        }
+        if(!preg_match("#[0-9]+#",$pass)){
+            $passErr = $passErr."<br>"."Password must contain atleast 1 number";
+            $isError = true;
+        }
+        if(!preg_match("#[A-Z]+#",$pass)){
+            $passErr = $passErr."<br>"."Password must contain atleast 1 uppercase";
+            $isError = true;
+        }
+        if(!preg_match("#[a-z]+#",$pass)){
+            $passErr = $passErr."<br>"."Password must contain atleast 1 lowercase";
+            $isError = true;
+        }
+        if($pass != $con_pass){
+            $con_passErr = $con_passErr."<br>"."Passwords must match";
+            $isError = true;
+        }
+
+        if(!$isError){
+            $conn = mysqli_connect('localhost','root','','resilient');
+            $sql = "INSERT INTO register(email,password,usertype) VALUES (?,?,?)";
+            $prep = mysqli_prepare($conn,$sql);
+            mysqli_stmt_bind_param($prep,"ssi",$email,$pass,$type);
+            $result = mysqli_stmt_execute($prep);
+//            $result = mysqli_query($conn,$sql);
+            if($result){
+              $_SESSION["stemail"]=$email;
+              // $sql2="SELECT * FROM register WHERE email=?";
+              // $prep2=mysqli_prepare($conn,$sql2);
+              // mysqli_stmt_bind_param($prep2,'s',$email);
+              // mysqli_stmt_execute($prep2);
+              // // $result2=mysqli_stmt_get_result($prep2);
+              // $row = mysqli_fetch_assoc($prep2);
+
+              // echo $row["uid"];
+                if($type==0){
+                    header("Location: http://localhost/Resilient/stdetails.php");
+                }
+                if($type==1){
+                    header("Location: http://localhost/Resilient/reRegister.php");
+                }
+            }
+            else{
+                echo mysqli_error($conn);
+            }
+        }
+    }
+
+    ?>
+
+    <form class="container" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+        <div>
+            <center><br><h4 id="sub_heading">Create a new Resilience Account</h4><br></center>
+        </div>
+        <div class="form-group">
+        <label for="inputAddress" id="form_font">Email id:</label>
+            <span class="error" style="color: red">* <?php echo $emailErr;?></span>
+        <input type="text" class="form-control" name="emailid" placeholder="Enter your email id" id="emailid" autocorrect="off">
+
+      </div>
+
+        <div class="form-group">
+        <label for="inputAddress" id="form_font" >Password:</label>
+            <span class="error" style="color: red">* <?php echo $passErr;?></span>
+        <input type="password" class="form-control" name="password" placeholder="Enter a new password" id="pass" autocapitalize="none" autocorrect="off">
+      </div>
+
+        <div class="form-group">
+        <label for="inputAddress" id="form_font" >Confirm password:</label>
+            <span class="error" style="color: red">* <?php echo $con_passErr;?></span>
+        <input type="password" class="form-control" name="con_password" placeholder="Re-enter password" id="pass" autocapitalize="none" autocorrect="off">
+      </div>
+
+        <label class="" for="" id="form_font">Select type of account:</label>
+
+        <div class="custom-control custom-radio">
+          <input type="radio" id="customRadio1" name="type" value="0" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio1" id="radio_font">Student</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="customRadio2" name="type" value="1" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio2" id="radio_font">Recruiter</label>
+        </div>
+        <span class="error" style="color: red"><?php echo $type_Err;?></span>
+        <br>
+
+        <a  id="form_font" style="text-decoration: none;">Already have an account?</a>
+
+
+      <a href="login.php" id="Button" role="button" style=" ">Login</a>
         <br><br>
-          
-        <input type="password" name="password" placeholder="Enter a new password" id="ep" autocapitalize="none" autocorrect="off" style="border-color: #200122; padding:8px; border-radius: 10px;width:250px; " />
-        <br><br>
-          
-          <div id="type_box">
-          
-          <input type="radio" name="type" value="1" id="type">&nbsp;Student<br>
-          <input type="radio" name="type" value="2" id="type">&nbsp;Employer<br>
-              
-              </div>
-        
-        <input type="submit" id="Button"  value="Register"/>
-      </form>
-      <br>
-      <a href="#" id="Fo" style="text-decoration: none; color: black;">Already have an account?</a>
-      <br><br>
-      
-      
-      <a href="createacc.html" id="Button" role="button" style="text-decoration: none; ">Login</a>
-    </div>
-    </center>
-    
-    
-    
+
+      <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
 </html>
