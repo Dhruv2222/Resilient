@@ -2,17 +2,35 @@
  session_start();
  // $emailErr = $passErr = "";
  // $email = $pass= "";
- if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['saveResume'])) {
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
+     $date1=date_create($_POST['internstart']);
+     $date2=date_create($_POST['internend']);
+     $diff=(date_diff($date1,$date2));
+     if($diff->format("%R") == "-"){
+         echo 'do something here';
+     }
+     else{
+         $days=number_format($diff->format("%a"));
+         if($days >= 365){
+             $_SESSION["date_diff"]=($days/365).' years';
+         }
+         elseif($days >= 27){
+             $_SESSION["date_diff"]=ceil($days/30).' months';
+         }
+         else{
+             $_SESSION["date_diff"]=($days).' days';
+         }
+     }
    $_SESSION["internprofile"]=$_POST['internprofile'];
    $_SESSION["interncompany"]=$_POST['interncompany'];
    $_SESSION["interndes"]=$_POST['interndes'];
-   $_SESSION["internstart"]=$_POST['internstart'];
-   $_SESSION["internend"]=$_POST['internend'];
    $_SESSION["por"]=$_POST['por'];
    $_SESSION["porOrganization"]=$_POST['porOrganization'];
    $_SESSION["skill1"]=$_POST['skill1'];
    $_SESSION["skill2"]=$_POST['skill2'];
    $_SESSION["skill3"]=$_POST['skill3'];
+   $_SESSION["internstart"]=$_POST['internstart'];
+   $_SESSION["internend"]=$_POST['internend'];
    header('Location: http://localhost/resilient/resilientResume.php');
  }
 
@@ -58,7 +76,7 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <a class="navbar-brand" href="#" id="main_heading">Resilient</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -95,7 +113,7 @@
         <div class="form-group">
           <fieldset disabled>
           <label id="form_font">Name:</label>
-          <input type="text" class="form-control" id="name" value="<?php if(isset($_COOKIE["username"])){ echo $_COOKIE["username"]; } ?>">
+          <input type="text" class="form-control" id="name" value="<?php if(isset($_SESSION["stname"])){ echo $_SESSION["stname"]; } ?>">
         </fieldset>
         </div>
 
@@ -155,6 +173,7 @@
       <center>
       <button type="submit" class="btn btn-primary">Submit</button>
       </center>
+        <br>
 </form>
 
     <!-- Optional JavaScript -->
