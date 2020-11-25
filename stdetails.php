@@ -1,11 +1,23 @@
- <?php
+<?php
 if(isset($_POST['name']))
 {
   setcookie("username",$_POST['name']);
 }
   session_start();
+  echo "".$_SESSION["stemail"];
  ?>
  <?php
+ $stemail=$_SESSION["stemail"];
+   $conn = mysqli_connect('localhost','root','','resilient');
+   $sql2="SELECT * FROM register WHERE email='$stemail'";
+   $result=mysqli_query($conn,$sql2);
+   if (mysqli_num_rows($result)>0) {
+     while($row = mysqli_fetch_assoc($result)) {
+       $_SESSION["uid"] =$row["uid"];
+     }
+   } else {
+echo "0 results";
+}
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (empty($_POST['contact'])) {
      $x= "<b>Contact No. is required</b>";
@@ -40,6 +52,11 @@ if(isset($_POST['name']))
      $_SESSION["stbranch"]=$_POST['clgbranch'];
      $_SESSION["10Board"]=$_POST['10Board'];
      $_SESSION["school"]=$_POST['school'];
+     $_SESSION["jcollege"]=$_POST['jcollege'];
+     $_SESSION["12Board"]=$_POST['12Board'];
+
+
+       //iamge upload
      $target_dir = "uploads/";
      $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
      $uploadOk = 1;
@@ -81,6 +98,7 @@ if(isset($_POST['name']))
        echo "Sorry, your file was not uploaded.";
      // if everything is ok, try to upload file
      } else {
+       $_SESSION["Image"]=$_FILES["fileToUpload"]["tmp_name"];
        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
          echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
          $_SESSION["imgpath"]=$target_file;
@@ -124,7 +142,7 @@ if(isset($_POST['name']))
 <title>Student Details</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
 <a class="navbar-brand" href="#" id="main_heading">Resilient</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
@@ -161,7 +179,7 @@ if(isset($_POST['name']))
       <form class="container" method="POST" enctype="multipart/form-data">
 
 
-      <br><center><h4 id="sub_heading">Enter Details to Complete Application</h4></center><br>
+      <br><center><h2 id="sub_heading">Enter Details to Complete Application</h2></center><br>
 
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -170,8 +188,19 @@ if(isset($_POST['name']))
           </div>
 
           <div class="form-group col-md-6">
+<!--
             <label name="company_name" id="form_font">Upload Profile Picture:</label>
             <input type="file" class="form-control" name="fileToUpload" placeholder="Enter your Name" id="">
+
+-->
+              <label name="company_name" id="form_font">Upload Profile Picture:</label>
+              <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="form-control pb-4 pl-3" id="inputGroupFile02" name="fileToUpload">
+              </div>
+            </div>
+
+
           </div>
         </div>
         <br>
@@ -188,7 +217,7 @@ if(isset($_POST['name']))
           </div>
 
           <br>
-          <center><h4 id="sub_heading">Educational Details:</h4></center>
+          <center><h3 id="sub_heading">Educational Details:</h3></center>
           <br>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -196,14 +225,35 @@ if(isset($_POST['name']))
               <input type="text" name="school" class="form-control" id="" placeholder="St. Mary's">
             </div>
             <div class="form-group col-md-6">
-              <label id="form_font">10th Board Percentage:</label>
-              <input type="text" class="form-control" name="10Board" id="" placeholder="%">
+              <label class="inputState" id="form_font">10th Board Percentage:</label>
+                  <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="10Board" id="inlineFormInputGroup" placeholder="80">
+                      <div class="input-group-prepend">
+                      <div class="input-group-text">%</div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+          <br>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label name="" id="form_font">Junior College Name:</label>
+              <input type="text" name="jcollege" class="form-control" id="" placeholder="St. Mary's">
+            </div>
+            <div class="form-group col-md-6">
+                <label class="inputState" id="form_font">12th Board Percentage:</label>
+                  <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="12Board" id="inlineFormInputGroup" placeholder="80">
+                      <div class="input-group-prepend">
+                      <div class="input-group-text">%</div>
+                    </div>
+                  </div>
             </div>
           </div>
           <br>
           <div class="form-row">
             <div class="form-group col-md-4">
-              <label name="company_name" id="form_font">Enter College name</label>
+              <label name="company_name" id="form_font">Enter Degree College name</label>
               <input type="text" name="clgname" placeholder="KJ Somaiya College" class="form-control" id="" placeholder="1/1/2020">
             </div>
             <div class="form-group col-md-4">
@@ -224,18 +274,6 @@ if(isset($_POST['name']))
           <center>
           <button type="submit" value="Next" class="btn btn-primary">Next</button>
           </center>
-        <!-- Select Degree :<br>
-
-        <input type="radio" name="degree" value="BTech">Bachelor of Technology
-        <br>
-        <input type="radio" name="degree" value="BCom">Bachelor of Commerce
-        <br>
-        <input type="radio" name="degree" value="B.Ed">Bachelor of Education
-        <br>
-        <input type="radio" name="degree" value="BA">Bachelor of Arts
-        <br><br>
-        <input type="text" name="clgbranch" placeholder="Enter your Branch name" id="ep" autocorrect="off" style="border-color: #200122; padding:8px;border-radius: 10px;width:250px;" />
-        <br><br> -->
 
       <?php
       if(isset($x)){
@@ -249,4 +287,3 @@ if(isset($_POST['name']))
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
-
