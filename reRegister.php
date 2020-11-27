@@ -1,3 +1,62 @@
+<?php
+
+session_start();
+
+$error = "";
+
+$stemail=$_SESSION["stemail"];
+   $conn = mysqli_connect('localhost','root','','resilient');
+   $sql2="SELECT * FROM register WHERE email='$stemail'";
+   $result=mysqli_query($conn,$sql2);
+   if (mysqli_num_rows($result)>0) {
+     while($row = mysqli_fetch_assoc($result)) {
+       $_SESSION["uid"] =$row["uid"];
+     }
+   } else {
+echo "0 results";
+}
+
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
+     if(empty($_POST["orgname"])){
+         $error = "Enter all fields!";
+     }
+     elseif(empty($_POST["orgdes"])){
+         $error = "Enter all fields!";
+     }
+     elseif(empty($_POST["orgemail"])){
+         $error = "Enter all fields!";
+     }
+     elseif(empty($_POST["orgcontact"])){
+         $error = "Enter all fields!";
+     }
+     elseif(empty($_POST["orgcity"])){
+         $error = "Enter all fields!";
+     }
+     elseif(empty($_POST["orgpincode"])){
+         $error = "<br>"."Enter all fields!"."<br>";
+     }
+     else{
+         $conn=mysqli_connect('localhost','root','','resilient');
+         $sql="INSERT INTO redetails(uid,orgname,orgdes,orgemail,orgcontact,orgcity,orgpincode) VALUES(?,?,?,?,?,?,?) ";
+         $prep=mysqli_prepare($conn,$sql);
+         mysqli_stmt_bind_param($prep,"issssss",$_SESSION["uid"],$_POST["orgname"],$_POST["orgdes"],$_POST["orgemail"],$_POST["orgcontact"],$_POST["orgcity"],$_POST["orgpincode"]);
+         
+         $result=mysqli_stmt_execute($prep);
+         
+         if($result){
+             header('Location: http://localhost/resilient/rehome.php');
+         }
+         else{
+             echo "There is some error";
+         } 
+         
+     }
+ }
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -72,47 +131,47 @@
       
       
       
-    <form class="container">
+    <form class="container" method="post">
         <div>
             <center><br><h4 id="sub_heading">A few more details</h4><br></center>
         </div>
         <div class="form-group">
         <label for="inputAddress" id="form_font">Full name of organization:</label>
-        <input type="text" class="form-control" id="exampleFormControlTextarea1" placeholder="Eg. Microsoft Corporation">
+        <input type="text" class="form-control" name="orgname" id="exampleFormControlTextarea1" placeholder="Eg. Microsoft Corporation">
       </div>    
         <div class="form-group">
         <label for="inputAddress" id="form_font">Short description about your organization:</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="An American multinational technology company..."></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name="orgdes" rows="3" placeholder="An American multinational technology company..."></textarea>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
             <div class="form-group">
             <label id="form_font">Organization's emailid:</label>
-            <input type="text" class="form-control" id="exampleFormControlTextarea1" placeholder="">
+            <input type="text" class="form-control" name="orgemail" id="exampleFormControlTextarea1" placeholder="">
             </div> 
         </div>
         <div class="form-group col-md-6">
           <label id="form_font">Contact number:</label>
-          <input type="number" class="form-control" id="" placeholder="">
+          <input type="number" class="form-control" name="orgcontact" placeholder="">
         </div>
       </div>
         <div class="form-row">
         <div class="form-group col-md-6">
             <div class="form-group">
             <label id="form_font">City:</label>
-            <input type="text" class="form-control" id="exampleFormControlTextarea1" placeholder="Eg. Mumbai">
+            <input type="text" class="form-control" name="orgcity" id="exampleFormControlTextarea1" placeholder="Eg. Mumbai">
             </div> 
         </div>
         <div class="form-group col-md-6">
           <label id="form_font">Pincode:</label>
-          <input type="number" class="form-control" id="" placeholder="Eg. 400077">
+          <input type="number" class="form-control" name="orgpincode" id="" placeholder="Eg. 400077">
         </div>
       </div>
       
+      <span class="error" style="color: red"><?php echo $error;?></span>
       
-      
-      
-      <button type="submit" class="btn btn-primary">FINISH</button>
+      <button type="submit" class="btn btn-primary" id="Button" style=" ">FINISH</button>
+<!--      <button type="submit" class="btn btn-primary">FINISH</button>-->
 </form>
     
 
