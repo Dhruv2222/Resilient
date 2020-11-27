@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -63,9 +64,9 @@ session_start();
 <br>
 <center><h1 style="" id="sub_heading"> Look for internships . . .</h1></center>
 <?php
+$conn = mysqli_connect('localhost','root','','resilient');
 $internshipid=$_GET['internshipid'];
 if ($_SERVER['REQUEST_METHOD']=='GET') {
-  $conn = mysqli_connect('localhost','root','','resilient');
   $sql2="SELECT * FROM internships WHERE internshipid='$internshipid'";
   $result=mysqli_query($conn,$sql2);
   if (mysqli_num_rows($result)>0) {
@@ -116,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
       </div>
       <hr>
       <br><br>
-      <a href="#" class="btn btn-success">Apply now</a>
+    <?php echo'<a href="conect.php?internshipid='.$internshipid.'" type="submit" class="btn btn-success">Apply now</a>'; ?>
   </div>
 </div>
 
@@ -133,3 +134,4 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
+
