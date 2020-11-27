@@ -107,7 +107,12 @@
             	} if($count==1) {
             		$message = "You are successfully authenticated!";
                 $_SESSION["uid"]=$row['uid'];
-                header("Location: http://localhost/Resilient/sthome.php");
+                if($row['usertype']==0){
+                  header("Location: http://localhost/Resilient/sthome.php");
+                }else{
+                  header("Location: http://localhost/Resilient/rehome.php");
+                }
+
             	}
             //then direct to this page
 
@@ -148,3 +153,4 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
+
